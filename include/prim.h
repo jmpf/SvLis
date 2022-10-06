@@ -394,6 +394,13 @@ public:
 
 // *************** External functions
 
+/* external function prototypes added by imc to satisfy gcc 4 */
+sv_primitive p_cylinder(const sv_line&, sv_real);
+sv_primitive p_cone(const sv_line&, sv_real);
+sv_primitive p_sphere(const sv_point&, sv_real);
+sv_primitive p_cyclide(const sv_line&, const sv_point&, sv_real, sv_real, sv_real);
+sv_primitive p_torus(const sv_line&, sv_real, sv_real);
+
 // All the corners of a box the same sign for a primitive?
 
 extern void definite(const sv_primitive&, const sv_box&, mem_test*, sv_integer*);
