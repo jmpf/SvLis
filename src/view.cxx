@@ -187,7 +187,7 @@ debug_print_view(const sv_view& vew,
    if(msg) cout << msg;
 //   cout << " (at " << &vew << ") is:\n";
 // GMB 06-12-94
-   cout << " (at " << (int)&vew << ") is:\n";
+   cout << " (at " << (long)&vew << ") is:\n";
    cout << "eye-point: " << vew.eye.x << ", " << vew.eye.y << ", " << vew.eye.z << "\n";
    cout << "centre: " << vew.cen.x << ", " << vew.cen.y << ", " << vew.cen.z << "\n";
    cout << "up-dir: " << vew.up.x << ", " << vew.up.y << ", " << vew.up.z << "\n";

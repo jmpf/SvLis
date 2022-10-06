@@ -732,7 +732,7 @@ void read_ppm_pic(istream& s, sv_picture** svp)
 short get_short(istream& ifs)
 {
    short s, c0, c1;
-   unsigned char b0, b1;
+   char b0, b1;
    ifs.get(b0);
    ifs.get(b1);
    c0 = b0;
@@ -744,7 +744,7 @@ short get_short(istream& ifs)
 long get_long(istream& ifs)
 {
    long l, c0, c1, c2, c3;
-   unsigned char b0, b1, b2, b3;
+   char b0, b1, b2, b3;
    ifs.get(b0);
    ifs.get(b1);
    ifs.get(b2);
@@ -778,7 +778,7 @@ void read_bmp_pic(istream& s, sv_picture** svp)
 // Read the rest of the bitmap header
 
    unsigned long w, h, d, n_cols, pic_bytes, planes, comp;
-   unsigned char r, g, b;
+   char r, g, b;
    sv_pixel palette[256];
 
    if( head_bytes == SV_BMP_OLDHSZ )
@@ -840,7 +840,7 @@ void read_bmp_pic(istream& s, sv_picture** svp)
 
 // Read the bitmap
 
-   unsigned char index;
+   char index;
    long rowleft = ((d*w + 31)/32)*4 - w*(d/8);
    for(i = 0; i < h; i++)
    {
