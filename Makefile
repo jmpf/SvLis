@@ -352,9 +352,11 @@ install:	$(ODIR) $(LDIR) $(RESULTS) $(RDIR) all
 
 all:		library test svlis refinery
 
-library:        $(ODIR) $(LDIR) $(OBJECTS)
+library:	$(LDIR)/libsvlis.a
+
+$(LDIR)/libsvlis.a:	$(ODIR) $(LDIR) $(OBJECTS)
 		rm -rf $(LDIR)/libsvlis.a
-		ar -rus $(LDIR)/libsvlis.a $(OBJECTS)
+		ar -rs $(LDIR)/libsvlis.a $(OBJECTS)
 		$(RANLIB)
 
 # The next one is intended for general short experiments
