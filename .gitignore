@@ -2,5 +2,7 @@
 *~
 **/*~
 
-# Object files (and the folder containing them)
+# Object, binary and library files (and the folders containing them)
 obj/
+bin/
+lib/
