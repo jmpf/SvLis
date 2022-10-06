@@ -138,7 +138,7 @@ void lazy_grad(const sv_primitive& p, sv_primitive& x, sv_primitive& y, sv_primi
 			return;
 
 		case SV_POW:
-			switch(round(p.child_2().real()))
+			switch(sv_round(p.child_2().real()))
 			{
 			case 0:
 				svlis_error("lazy_grad(...)","zero exponent",SV_WARNING);
@@ -153,7 +153,7 @@ void lazy_grad(const sv_primitive& p, sv_primitive& x, sv_primitive& y, sv_primi
 				break;
 
 			default:
-				pm = ( p.child_1()^sv_primitive(round(p.child_2().real() - 1)) )*p.child_2();
+				pm = ( p.child_1()^sv_primitive(sv_round(p.child_2().real() - 1)) )*p.child_2();
 			}
 			x = pm*x1;
 			y = pm*y1;
@@ -1103,7 +1103,7 @@ sv_primitive sv_primitive::dump_scales() const
 			break;
 
 		case SV_POW:
-			if (round( child_2().real() )%2)
+			if (sv_round( child_2().real() )%2)
 				return( child_1().dump_scales() );
 			else
 				return(*this);
@@ -1375,13 +1375,13 @@ sv_primitive operator^(const sv_primitive& a, const sv_primitive& b)
 	if (b.kind() != SV_REAL) svlis_error("sv_primitive operator^",
 		"primitive^primitive not supported",SV_WARNING);
 	if (a.kind() == SV_REAL)
-		c = sv_primitive(pow( a.real(),round(b.real()) ));
+		c = sv_primitive(pow( a.real(),sv_round(b.real()) ));
 	else
 	{
 		if (b.real() < 0)
 			svlis_error("sv_primitive operator^",
 				"negative exponents not supported",SV_WARNING);
-		switch(round(b.real()))
+		switch(sv_round(b.real()))
 		{
 		case 0:
 			return(sv_primitive(1));
@@ -2035,7 +2035,7 @@ sv_real sv_primitive::value(const sv_point& q) const
 			break;
 
 		case SV_POW:
-			c = pow( child_1().value(q), round( child_2().real() ) );
+			c = pow( child_1().value(q), sv_round( child_2().real() ) );
 			break;
 
 		case SV_COMP:
@@ -2218,11 +2218,11 @@ sv_interval sv_primitive::range(const sv_box& b) const
 				{
 					svlis_error("sv_primitive::range(box)","primitive is real^real",
 						SV_WARNING);
-					c = sv_interval(pow(child_1().real(), round(child_2().real())), 
-							pow(child_1().real(),round(child_2().real())) );						
+					c = sv_interval(pow(child_1().real(), sv_round(child_2().real())),
+							pow(child_1().real(), sv_round(child_2().real())) );
 				}
 				else
-					c = pow( child_1().range(b), round( child_2().real() ) );
+					c = pow( child_1().range(b), sv_round( child_2().real() ) );
 			}
 			break;
 

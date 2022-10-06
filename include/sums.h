@@ -67,8 +67,8 @@
 using namespace std;
 
 // Round a float:
-
-inline sv_integer round(sv_real a) 
+// The name "round" clashes with double round(double x) in math.h
+inline sv_integer sv_round(sv_real a) 
 {
 	return( (a > 0.0) ? (sv_integer)(a + 0.5) : (sv_integer)(a - 0.5) );
 }
