@@ -366,7 +366,7 @@ svlis:		$(RDIR)/svlis
 expt:		$(ODIR)/expt.o
 		$(CC) -pthread -o $(RDIR)/expt $(ODIR)/expt.o $(GLIBS)
 
-sv_display:	$(ODIR)/sv_display.o $(INCLUDE)
+$(RDIR)/sv_display:	$(ODIR)/sv_display.o $(INCLUDE)
 		$(CC) -pthread -o $(RDIR)/sv_display $(ODIR)/sv_display.o $(GLIBS)
 
 test:		$(RDIR)/sv_tst_1 $(RDIR)/sv_tst_2 $(RDIR)/sv_tst_g $(RDIR)/engine $(RDIR)/sv_display $(RDIR)/sv_convert $(RDIR)/voronoi_tst
