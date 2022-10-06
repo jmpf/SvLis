@@ -1956,7 +1956,7 @@ void logfile_change()
 #if macintosh
 			logfile->seekp(-4,(ios::seekdir)1);
 #else
-			logfile->seekp(-4,(ios::seek_dir)1);
+			logfile->seekp(-4,(ios::seekdir)1);
 #endif
 			*logfile << "q" << SV_EL; 
 			stoplog();
