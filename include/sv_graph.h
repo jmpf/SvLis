@@ -350,5 +350,17 @@ inline void plot_m_boxes(const sv_model& m, sv_integer pb)  // For backwards com
 
 extern sv_model_list* all_the_models();
 
+
+// Merge in a new model (unfaceted)
+
+extern sv_model_list* add_model_to_picture(const sv_model&, const sv_point& p, 
+	   const sv_line& a, sv_real th, void (*cb)(sv_model_list*, const sv_point&, 
+	   const sv_line&, sv_real, sv_xform_action) );
+
+// Merge in a new model (faceted)
+
+extern sv_model_list* add_model_to_picture(const sv_model&, const sv_model&, const sv_point& p, 
+	   const sv_line& a, sv_real th, void (*cb)(sv_model_list*, const sv_point&, 
+	   const sv_line&, sv_real, sv_xform_action) );
 #endif
 
