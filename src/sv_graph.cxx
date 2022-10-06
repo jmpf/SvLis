@@ -197,6 +197,11 @@ static sv_real tet_fac = 0.8;
  
 static sv_integer plot_axes = 0; 
 
+
+// Forward declaration for later
+void sv_delete_picture_list();
+
+
 //********************************************************************************************************
 
 // Thread handling
@@ -3193,7 +3198,7 @@ void plot_m_p_gons( const sv_model& m, const char* title )
 
 // Plot the model _and_ its boxes 
  
-void plot_m_boxes( const sv_model& m, sv_integer plot_mod, char* title ) 
+void plot_m_boxes( const sv_model& m, sv_integer plot_mod, const char* title ) 
 { 
 	box_mod = m; 
 	sv_model mf = sv_model(m.set_list(), m.box(), sv_model()); 

@@ -73,7 +73,7 @@ flag_val svlis_flag;
 // This is the standard minimal internal error-reporting procedure 
 // which the user may call from svlis_error.
 
-void sv_error_int(char* p, char* mess, sv_err l)
+void sv_error_int(const char* p, const char* mess, sv_err l)
 {	
 	cerr << "SvLis ";
 	switch(l)

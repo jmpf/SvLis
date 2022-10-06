@@ -22,7 +22,7 @@ state* now = 0;
 
 // The Unix/X xv command
 
-static char* xv_command = "/usr/local/bin/xv";
+static const char* xv_command = "/usr/local/bin/xv";
 
 //**************************************************************
 
@@ -104,7 +104,7 @@ sv_model current_divided_model()
                  
 // Print out stats on the current divided model
                  
-void printstats(char* f_name, ostream& op)
+void printstats(const char* f_name, ostream& op)
 {
 	current_divided_model().div_stat_report(op);
 	if(f_name[0])
@@ -260,7 +260,7 @@ char* get_pic_filename() {return(now->pic_filename);}
 sv_light_list* get_lamp_list() { return(now->lamp_list); }
 void set_lamp_list(sv_light_list* l) { now->lamp_list = l; }
 
-void update_lamplist(char *name,
+void update_lamplist(const char *name,
 		light_type type,
 		sv_point location,
 		sv_point colour,
@@ -329,7 +329,7 @@ void update_lamplist(char *name,
    lamplist_entry->source->angle_power(angle_power);
 }
 
-void update_lamplist(char *name, const sv_lightsource& l)
+void update_lamplist(const char *name, const sv_lightsource& l)
 {
 	update_lamplist(name, l.type(),
 		l.location(),

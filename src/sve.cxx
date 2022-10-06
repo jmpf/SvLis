@@ -81,7 +81,7 @@ sv_err lev = SV_WARNING;
 
 // User's error-intercept procedure
 
-void svlis_error(char* p, char* mess, sv_err l)
+void svlis_error(const char* p, const char* mess, sv_err l)
 {
 	if (l < lev) return;
 	sv_error_int(p, mess, l);

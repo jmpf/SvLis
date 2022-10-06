@@ -33,7 +33,7 @@ char ip[STLEN];		// Command line read
 
 // Commentary
 
-void co(char* s)
+void co(const char* s)
 {
 	if(!com) return;
 	*cf << s;
@@ -188,7 +188,7 @@ inline int rdl()
 
 // Error prompt - make sure it appears even from batch
 
-void eprompt(char* s)
+void eprompt(const char* s)
 {
 	cerr << s;
 	cerr.flush();
@@ -210,7 +210,7 @@ void cerror(char a)
 
 // Ordinary prompt - supressed in batch mode
 
-void prompt(char* s)
+void prompt(const char* s)
 {
 	if(!prp) return;
 	cout << s;
@@ -219,7 +219,7 @@ void prompt(char* s)
 
 // Prompt to both the commentary and the screen
 
-void cprompt(char* s)
+void cprompt(const char* s)
 {
 	co(s);
 	prompt(s);
@@ -282,7 +282,7 @@ int def_real(sv_real& r)
 
 // Put up a message and wait for a yes/no answer.
 
-sv_integer sv_edit_message(char* msg, int def_n)
+sv_integer sv_edit_message(const char* msg, int def_n)
 {
 	prompt(msg);
         if(def_n)
@@ -542,7 +542,7 @@ void add_point()
 
 // Get a line for either raytrace or inclusion in the model
 
-sv_line get_line(char* thing)
+sv_line get_line(const char* thing)
 {
 	sv_line l;
 	sv_real r;
@@ -850,7 +850,7 @@ void add_set()
 
 // Thick or thin?
 
-sv_integer gt(char* s)
+sv_integer gt(const char* s)
 {
 	sv_strcpy(ip, "    Do you want a thin ");
 	sv_strcat(ip, s);
