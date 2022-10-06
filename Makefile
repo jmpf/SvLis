@@ -350,7 +350,7 @@ OBJECTS = \
 
 install:	$(ODIR) $(LDIR) $(RESULTS) $(RDIR) all
 
-all:		library test svlis refinery
+all:		library test $(RDIR)/svlis refinery
 
 library:	$(LDIR)/libsvlis.a
 
@@ -358,6 +358,7 @@ $(LDIR)/libsvlis.a:	$(ODIR) $(LDIR) $(OBJECTS)
 		rm -rf $(LDIR)/libsvlis.a
 		ar -rs $(LDIR)/libsvlis.a $(OBJECTS)
 		$(RANLIB)
+svlis:		$(RDIR)/svlis
 
 # The next one is intended for general short experiments
 # Edit programs/tst_progs/expt.cxx to do whatever you like
@@ -368,7 +369,7 @@ expt:		$(ODIR)/expt.o
 sv_display:	$(ODIR)/sv_display.o $(INCLUDE)
 		$(CC) -pthread -o $(RDIR)/sv_display $(ODIR)/sv_display.o $(GLIBS)
 
-test:		sv_tst_1 sv_tst_2 sv_tst_g engine sv_display sv_convert voronoi_tst
+test:		$(RDIR)/sv_tst_1 $(RDIR)/sv_tst_2 $(RDIR)/sv_tst_g $(RDIR)/engine $(RDIR)/sv_display $(RDIR)/sv_convert $(RDIR)/voronoi_tst
 
 clean:
 		rm -rf $(LDIR); rm -rf $(RESULTS); \
@@ -396,22 +397,22 @@ $(RDIR):
 
 # Test and other short programs
 
-sv_tst_1:	$(ODIR)/sv_tst_1.o
+$(RDIR)/sv_tst_1:	$(ODIR)/sv_tst_1.o
 		$(CC) -pthread -o $(RDIR)/sv_tst_1 $(ODIR)/sv_tst_1.o $(GLIBS)
 
-sv_tst_2:	$(ODIR)/sv_tst_2.o
+$(RDIR)/sv_tst_2:	$(ODIR)/sv_tst_2.o
 		$(CC) -pthread -o $(RDIR)/sv_tst_2 $(ODIR)/sv_tst_2.o $(GLIBS)
 
-sv_tst_g:	$(ODIR)/sv_tst_g.o
+$(RDIR)/sv_tst_g:	$(ODIR)/sv_tst_g.o
 		$(CC) -pthread -o $(RDIR)/sv_tst_g $(ODIR)/sv_tst_g.o $(GLIBS)
 
-engine:		$(ODIR)/engine.o
+$(RDIR)/engine:		$(ODIR)/engine.o
 		$(CC) -pthread -o $(RDIR)/engine $(ODIR)/engine.o $(GLIBS)
 
-sv_convert:	$(ODIR)/sv_convert.o
+$(RDIR)/sv_convert:	$(ODIR)/sv_convert.o
 		$(CC) -pthread -o $(RDIR)/sv_convert $(ODIR)/sv_convert.o $(GLIBS)
 
-voronoi_tst:	$(ODIR)/voronoi_tst.o
+$(RDIR)/voronoi_tst:	$(ODIR)/voronoi_tst.o
 		$(CC) -pthread -o $(RDIR)/voronoi_tst $(ODIR)/voronoi_tst.o $(GLIBS)
 
 # Program objects
@@ -448,7 +449,7 @@ $(ODIR)/voronoi_tst.o:	$(TDIR)/voronoi_tst.cxx $(INCLUDE)
 
 EDITS = $(PDIR)/sv_edit/src
 
-svlis:	$(ODIR)/sv_edit.o $(ODIR)/edittool.o $(IDIR)/edittool.h $(IDIR)/sv_edit.h
+$(RDIR)/svlis:	$(ODIR)/sv_edit.o $(ODIR)/edittool.o $(IDIR)/edittool.h $(IDIR)/sv_edit.h
 	$(CC) $(FLAGS) $(ODIR)/sv_edit.o $(ODIR)/edittool.o -o $(RDIR)/svlis \
 	$(GLIBS)
 
