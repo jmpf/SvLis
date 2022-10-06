@@ -63,6 +63,9 @@
  #define min minn
 #endif
 
+#include <iostream>
+using namespace std;
+
 // Round a float:
 
 inline sv_integer round(sv_real a) 
