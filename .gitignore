@@ -1,3 +1,6 @@
 # Backups
 *~
 **/*~
+
+# Object files (and the folder containing them)
+obj/
