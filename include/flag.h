@@ -66,11 +66,11 @@ inline void set_sv_e_lev(sv_err l) { lev = l; }
 
 // This is the user-modifiable error routine (code in sv_user/sve.c++)
 
-void svlis_error(char*, char*, sv_err);
+void svlis_error(const char*, const char*, sv_err);
 
 // This is the internal error routine
 
-void sv_error_int(char*, char*, sv_err);
+void sv_error_int(const char*, const char*, sv_err);
 
 extern flag_val svlis_flag;
 

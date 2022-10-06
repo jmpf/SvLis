@@ -569,16 +569,16 @@ sv_box sv_enclosure() { return(enclosure); }
 // Ray-tracing 
  
 static sv_picture ray_pic; 
-static char* ray_pic_file = 0; 
+static const char* ray_pic_file = 0; 
 static sv_view view; 
 static sv_light_list* lights = 0; 
  
 #ifdef SV_UNIX 
  static pid_t xv_pid = 0; 
- static char* xv_command = "/usr/local/bin/xv"; 
+ static const char* xv_command = "/usr/local/bin/xv"; 
 #endif 
  
-static char* comment = "Raytraced by svLis; see http://www.bath.ac.uk/~ensab/G_mod/Svlis"; 
+static const char* comment = "Raytraced by svLis; see http://www.bath.ac.uk/~ensab/G_mod/Svlis"; 
  
 // Set up the view parameters for the ratracer 
  
@@ -686,7 +686,7 @@ void ray_t_pic()
 	        if(xv_pid == 0)  
                 { 
 		   // This is the child - exec an xv 
-		   execl(xv_command,"xv","-name","SvLis raytracer",ray_pic_file,0); 
+		   execl(xv_command,"xv","-name","SvLis raytracer",ray_pic_file, NULL); 
 	           svlis_error("ray_t_pic()", 
 	       	    "cannot exec xv", SV_WARNING); 
 	        } 
@@ -1742,7 +1742,7 @@ void sv_draw_all()
 
 // Procedure that gets called when no thread is running to initiate it
 
-void first_model(char* title)
+void first_model(const char* title)
 {
 	if(thread_running) return;
         newModel = 1;
@@ -2381,7 +2381,7 @@ static void key(unsigned char k, int x, int y)
    float new_quat[4];
    sv_point new_trans = SV_OO; 
    sv_set s; 
-   char* pfn;
+   std::string pfn;
    int new_x = 0; 
  
    trackball(new_quat, 0, 0, 0, 0);
@@ -2559,7 +2559,7 @@ static void key(unsigned char k, int x, int y)
 		pfn = "svlis.bmp"; 
 	 else 
 		pfn = "svlis.ppm"; 
-	 write_image(pfn, pic, "Image from svLis display"); 
+	 write_image(pfn.c_str(), pic, "Image from svLis display"); 
 	 cout << SV_EL << "Picture written to " << pfn << SV_EL; 
          cout.flush(); 
 	 break; 
@@ -2898,14 +2898,14 @@ void menuRaytrace(int value)
     case 3: 
 	if(low_c > 0) low_c--; 
    	glutSetMenu(3); 
-    	sprintf(tmp_str, "Low contents is %d", low_c); 
+    	sprintf(tmp_str, "Low contents is %ld", low_c); 
    	glutChangeToMenuEntry(4, tmp_str, -1); 
 	break; 
  
     case 4: 
 	low_c++; 
    	glutSetMenu(3); 
-    	sprintf(tmp_str, "Low contents is %d", low_c); 
+    	sprintf(tmp_str, "Low contents is %ld", low_c); 
    	glutChangeToMenuEntry(4, tmp_str, -1); 
 	break; 
  
@@ -2990,7 +2990,7 @@ void sv_run_glut(void *dummy)
 
     glutInitDisplayMode( GLUT_RGB | GLUT_DEPTH | GLUT_DOUBLE ); 
  
-    char* wn = win_name; 
+    const char* wn = win_name; 
     if(!wn) wn = "svLis"; 
  
     if ((win_id = glutCreateWindow(wn)) == GL_FALSE) 
@@ -3058,7 +3058,7 @@ void sv_run_glut(void *dummy)
       glutAddMenuEntry("Raytrace this to sv_ray.ppm", 2); 
     } 
     glutAddMenuEntry(MENU_SEP, -1); 
-    sprintf(tmp_str, "Low contents is %d", low_c); 
+    sprintf(tmp_str, "Low contents is %ld", low_c); 
     glutAddMenuEntry(tmp_str, -1); 
     glutAddMenuEntry("Decrease low contents by 1", 3);     
     glutAddMenuEntry("Increase low contents by 1", 4); 
@@ -3180,7 +3180,7 @@ void sv_run_glut(void *dummy)
 
 // User-called functions
  
-void plot_m_p_gons( const sv_model& m, char* title ) 
+void plot_m_p_gons( const sv_model& m, const char* title ) 
 {
    sv_enclosure(m.box()); 
    if(thread_running)
@@ -3222,7 +3222,7 @@ void plot_m_boxes( const sv_model& m, sv_integer plot_mod, char* title )
 
 // Plot a Voronoi diagram
 
-void plot_voronoi(const sv_voronoi& v, char* title, 
+void plot_voronoi(const sv_voronoi& v, const char* title, 
 	sv_integer pv, sv_integer pd, sv_integer px, 
 	sv_real tf) 
 { 

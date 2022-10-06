@@ -138,7 +138,7 @@ sv_integer get_svlis_version() { return(SV_VER);}
 
 // Tokens for tags
 
-static char* tag_names[SVT_TOP_T + 1] = 
+static const char* tag_names[SVT_TOP_T + 1] = 
 {
 	"zero",
 	"point",
@@ -179,7 +179,7 @@ static char* tag_names[SVT_TOP_T + 1] =
 	"end"
 };
 
-char* sv_tag_lu(sv_tag t) {return(tag_names[t]);}
+const char* sv_tag_lu(sv_tag t) {return(tag_names[t]);}
 
 sv_tag sv_name_lu(char* str)
 {

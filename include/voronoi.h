@@ -328,7 +328,7 @@ sv_voronoi tet_mesh(const sv_model&, sv_real);
 
 // Graphics procedures
 
-extern void plot_voronoi(const sv_voronoi&, char*, 
+extern void plot_voronoi(const sv_voronoi&, const char*, 
   sv_integer, sv_integer, sv_integer,
 	sv_real);
 

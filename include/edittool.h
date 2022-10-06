@@ -84,7 +84,7 @@ extern void e_view_back();
 extern void add_set(const sv_set&, sv_ed_op);
 extern void model_change(const sv_set&);
 extern void checksave();
-extern void printstats(char*, ostream&);
+extern void printstats(const char*, std::ostream&);
 extern sv_surface current_surface();
 extern void new_surface(const sv_surface&);
 extern sv_box current_box();
@@ -119,12 +119,12 @@ extern sv_real get_report_step();
 extern void set_report_step(sv_real);
 extern mem_test membership(const sv_point&);
 extern sv_set raytrace(const sv_line&, sv_real*);
-extern sv_integer sv_edit_message(char*, int); // from the driver program
+extern sv_integer sv_edit_message(const char*, int); // from the driver program
 extern void save_model(const sv_model& m);
 extern void plot_box(sv_integer);
 extern sv_line get_ray();
-extern void update_lamplist(char*,const sv_lightsource&);
-extern void update_lamplist(char*, light_type, sv_point, sv_point, sv_real, 
+extern void update_lamplist(const char*,const sv_lightsource&);
+extern void update_lamplist(const char*, light_type, sv_point, sv_point, sv_real, 
     sv_point, sv_real);
 extern sv_integer get_faceting();
 extern void set_faceting(sv_integer);
@@ -142,9 +142,9 @@ extern void set_pic_resolution(sv_integer, sv_integer);
 // from the driver program
 
 extern void model2load(const sv_model&);
-extern void prompt(char*);
-extern void cprompt(char*);
-extern void eprompt(char*);
+extern void prompt(const char*);
+extern void cprompt(const char*);
+extern void eprompt(const char*);
 extern void r_to_str(char*,  sv_real);
 extern void p_to_str(char*,  const sv_point&);
 

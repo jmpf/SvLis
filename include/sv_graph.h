@@ -292,7 +292,7 @@ extern void sv_draw_all();
 
 // The plot facets procedure (historical)
 
-extern void plot_m_p_gons(const sv_model& m, char*); // For backwards compatibility
+extern void plot_m_p_gons(const sv_model& m, const char*); // For backwards compatibility
 
 // Fire a ray into the entire scene of models in the list
 
@@ -339,7 +339,7 @@ inline void plot_m_p_gons(const sv_model& m)  // For backwards compatibility
 
 // Plot boxes - mainly diagnostic
 
-extern void plot_m_boxes(const sv_model&, sv_integer, char*); // For backwards compatibility
+extern void plot_m_boxes(const sv_model&, sv_integer, const char*); // For backwards compatibility
 
 inline void plot_m_boxes(const sv_model& m, sv_integer pb)  // For backwards compatibility
 {
