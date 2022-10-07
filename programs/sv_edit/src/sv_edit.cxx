@@ -1995,8 +1995,9 @@ int readfrom(char* s)
 		return(0);
 	}
 	cip[isp] = new ifstream(s);
-	if(!cip[isp])
+	if(!cip[isp] || cip[isp]->fail())
 	{
+		isp--;
 		sv_strcpy(ip, "Unable to open the input file ");
 		sv_strcat(ip, s);
 		svlis_error("sv_edit", ip, SV_FATAL);
@@ -2116,7 +2117,7 @@ int main(int argc, char* argv[])
 	case 2:
 		slen = sv_strlen(argv[1]);
 
-		if((argv[1][slen-3] == 'm') &&
+		if(slen>=3 && (argv[1][slen-3] == 'm') &&
 			(argv[1][slen-2] == 'o') &&
 			(argv[1][slen-1] == 'd'))
 		{
