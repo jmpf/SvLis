@@ -576,7 +576,13 @@ double MatrixR[4][4];
  MatrixR[0][3] = MatrixR[1][3] = MatrixR[2][3] = MatrixR[3][0] = MatrixR[3][1] = MatrixR[3][2] = 0.0;
  MatrixR[3][3] = 1.0;
 
- memcpy( MatrixA, MatrixR, sizeof(MatrixA) );
+ //memcpy( MatrixA, MatrixR, sizeof(MatrixA) );
+ // Copy the temporary matrix to result in the safest way
+ for (int i=0; i<4; i++){
+  for (int j=0; j<4; j++){
+    MatrixA[i][j] = MatrixR[i][j];
+  }
+}
  return TRUE;
 }
 
