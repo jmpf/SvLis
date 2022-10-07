@@ -11,6 +11,7 @@
 #if macintosh 
  #pragma export on 
 #endif 
+extern "C" {int XInitThreads(void);}
  
 // Where to get the model 
  
@@ -20,12 +21,14 @@
  #define RES_FILE "results/sv_tst.mod" 
 #endif 
  
-int main() 
+int main(int argc, char **argv)
 { 
 	char dummy; 
  
 // Initialize svLis and declare a model 
  
+	XInitThreads();
+	glutInit(&argc, argv);
 	svlis_init(); 
 	sv_model m; 
  

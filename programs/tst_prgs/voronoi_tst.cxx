@@ -10,13 +10,16 @@
 #if macintosh
  #pragma export on
 #endif
+extern "C" {int XInitThreads(void);}
 
-int main()
+int main(int argc, char **argv)
 {
 	char r = ' ';
 	sv_point p, q;
 	sv_integer i, c;
 
+	XInitThreads();
+	glutInit(&argc, argv);
 	svlis_init();
 
 	cout << SV_EL << "SvLis Voronoi diagram test" << SV_EL << SV_EL;

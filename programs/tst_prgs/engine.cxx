@@ -3,6 +3,7 @@
 
 #include <svlis.h>
 #include "sv_cols.h"
+extern "C" {int XInitThreads(void);}
 
 #if macintosh
  #pragma export on
@@ -56,10 +57,13 @@ sv_model piston()
 	return(sv_model(cyl, sv_box(bl,tr)));
 }
 
-int main()
+int main(int argc, char **argv)
 {
 	sv_model cb;
 	char dummy;
+
+	XInitThreads();
+	glutInit(&argc, argv);
 
 	set_small_volume(0.2);
 

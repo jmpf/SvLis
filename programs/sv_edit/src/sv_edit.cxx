@@ -5,7 +5,9 @@
  */
 
 
+#include <GL/glut.h>
 #include "svlis.h"
+extern "C" {int XInitThreads(void);}
 
 #include "edittool.h"
 #include "sv_edit.h"
@@ -2099,6 +2101,8 @@ int main(int argc, char* argv[])
 	sv_box b;
 	sv_integer slen;
 
+	XInitThreads();
+	glutInit(&argc,argv);
 	svlis_init();
 	sv_edit_init();
 	set_swell_fac(0.05);

@@ -11,11 +11,14 @@
 #if macintosh
  #pragma export on
 #endif
+extern "C" {int XInitThreads(void);}
 
 int main(int argc, char* argv[])
 {
 	sv_model m;
 
+	XInitThreads();
+	glutInit(&argc, argv);
 	svlis_init();
 	if(argc != 2)
 	{
