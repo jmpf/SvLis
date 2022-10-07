@@ -355,12 +355,14 @@ install:	$(ODIR) $(LDIR) $(RESULTS) $(RDIR) all
 
 all:		library test $(RDIR)/svlis refinery
 
-library:	$(LDIR)/libsvlis.a
+library:	$(LDIR)/libsvlis.a $(LDIR)/libsvlis.so
 
-$(LDIR)/libsvlis.a:	$(ODIR) $(LDIR) $(OBJECTS)
+$(LDIR)/libsvlis.a:	$(ODIR) $(OBJECTS)
 		rm -rf $(LDIR)/libsvlis.a
 		ar -rs $(LDIR)/libsvlis.a $(OBJECTS)
 		$(RANLIB)
+		
+$(LDIR)/libsvlis.so:	$(ODIR) $(OBJECTS)
 		$(CC) -shared -Wl,-soname=libsvlis.so.4 -o $(LDIR)/libsvlis.so.4.0 $(OBJECTS) -lglut -lGLU -lGL -lXext -lX11 -lpthread -lm
 		ln -sf libsvlis.so.4.0 $(LDIR)/libsvlis.so.4
 		ln -sf libsvlis.so.4 $(LDIR)/libsvlis.so
