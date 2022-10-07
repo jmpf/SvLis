@@ -82,7 +82,7 @@ class sv_interval
 
 	sv_interval(sv_real a=1.0, sv_real b=0.0)
 	{
-          if(empt = b < a) return;
+          empt = b < a;  // FIXME: it shouldn't matter what lo and hi are now but update_tfb doesn't check empt, so set them anyway
 #ifdef SV_AFFINE 
           a0 = (a + b)*0.5;
           od = (b - a)*0.5;
