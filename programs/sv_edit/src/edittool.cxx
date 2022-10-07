@@ -200,7 +200,7 @@ void do_ray_render()
 	       if(now->xv_pid == 0) 
                {
 		  // This is the child - exec an xv
-		  execl(xv_command,"xv","-name","SvLis","-viewonly",now->pic_filename,0);
+		  execl(xv_command,"xv","-name","SvLis","-viewonly",now->pic_filename,NULL);
 	          svlis_error("do_ray_render()",
 	       	    "cannot exec xv", SV_WARNING);
 	       }
