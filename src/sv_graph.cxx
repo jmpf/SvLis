@@ -1329,6 +1329,7 @@ void ray_enquire(int x, int y, int button)
 	sv_primitive p = s.primitive(); 
 	sv_integer k; 
 	sv_real r0, r1, r2; 
+	sv_box block;  // --irina
 	sv_plane f; 
         sv_point cen; 
 	sv_line axis;
