@@ -115,7 +115,7 @@
 #ifdef SV_UNIX
  #include "sys/stat.h" 
  #include "sys/types.h" 
- #include <strstream> 
+ #include <sstream> 
  #include "fcntl.h" 
  #include "unistd.h"
  #include "pthread.h"  

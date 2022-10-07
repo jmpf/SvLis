@@ -190,9 +190,10 @@ sv_tag sv_name_lu(char* str)
 			return((sv_tag)t);
 		t++;
 	} while(t < SVT_TOP_T);
-	char msg[80];
-	ostrstream ost(msg, 80);
-	ost << "dud tag name: " << str << '\0';
+	const char *msg;
+	ostringstream ost;
+	ost << "dud tag name: " << str ;
+	msg = ost.str().c_str();
 	svlis_error("sv_name_lu", msg, SV_WARNING);
 	return(SVT_TOP_T); 
 }
@@ -328,8 +329,8 @@ sv_tag get_token(istream& s, sv_integer& j, sv_real& r, int expect_i)
 
 int check_token(istream& s, sv_tag t)
 {
-	char msg[80];
-	ostrstream ost(msg, 80);
+	const char *msg;
+	ostringstream ost;
 	
 	sv_integer di = 0;
 	sv_real dr = 0;
@@ -338,7 +339,8 @@ int check_token(istream& s, sv_tag t)
 	if (tt != t)
 	{
 		ost << "dud token: " << sv_tag_lu(tt) << " (expecting: " <<
-			sv_tag_lu(t) << ")\0";
+			sv_tag_lu(t) << ')';
+		msg = ost.str().c_str();
 		svlis_error("check_token", msg, SV_WARNING);
 		return(0);
 	} else
@@ -362,8 +364,8 @@ void check_svlis_header(istream& s)
 {
 	sv_integer ver = -1;
 	sv_real r;
-	char msg[80];
-	ostrstream ost(msg,80);
+	const char *msg;
+	ostringstream ost;
 
 	if(!check_token(s, SVT_SVLIS))
 	{
@@ -379,6 +381,7 @@ void check_svlis_header(istream& s)
 	if(ver != SV_VER)
 	{
 	  ost << "different file version: " << ver << " (expecting: " << SV_VER << ")" << '\0'; 
+	  msg = ost.str().c_str();
 	  svlis_error("check_svlis_header", msg, SV_WARNING);
 	}
 	set_read_version(ver);

@@ -238,18 +238,20 @@ void defp(char* s)
 
 void p_to_str(char* str, const sv_point& p)
 {
-	ostrstream ost(str, STLEN);
+	ostringstream ost;
 	ost << '(' << p.x << ", ";
 	ost << p.y << ", ";
-	ost << p.z << ')' << '\0';
+	ost << p.z << ')';
+	sv_strcpy(str, ost.str().c_str());
 }
 
 // Put a real in a string
 
 void r_to_str(char* str, sv_real r)
 {
-	ostrstream ost(str, STLEN);
-	ost << r << '\0';
+	ostringstream ost(str);
+	ost << r;
+	sv_strcpy(str, ost.str().c_str());
 }
 
 // Get a single default point
@@ -260,7 +262,7 @@ int def_point(sv_point& p)
 	defp(ip);
 	int i = rd();
 	co(ip);
-	istrstream ist(ip, STLEN);
+	istringstream ist(ip);
 	ist >> p.x;
 	ist >> p.y;
 	ist >> p.z;
@@ -275,7 +277,7 @@ int def_real(sv_real& r)
 	defp(ip);
 	int i = rd();
 	co(ip);
-	istrstream ist(ip, STLEN);
+	istringstream ist(ip);
 	ist >> r;
 	return(i);
 }
@@ -1515,7 +1517,7 @@ void picture_size()
    sv_strcat(ip,temp);
    defp(ip);
    rd();
-   istrstream ist(ip, STLEN);
+   istringstream ist(ip);
    ist >> w;
    ist >> h;
    set_pic_resolution(w,h);

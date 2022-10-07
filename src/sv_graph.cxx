@@ -1284,18 +1284,20 @@ sv_model_list *sv_ray_into_scene(
  
 void PtoStr(char* str, const sv_point& p) 
 { 
-        ostrstream ost(str, 100); 
+        ostringstream ost;
         ost << '(' << p.x << ", "; 
         ost << p.y << ", "; 
-        ost << p.z << ')' << '\0'; 
+        ost << p.z << ')' ;
+        sv_strcpy(str, ost.str().c_str());
 } 
  
 // Put a real in a string 
  
 void RtoStr(char* str, sv_real r) 
 { 
-        ostrstream ost(str, 100); 
-        ost << r << '\0'; 
+        ostringstream ost;
+        ost << r ;
+        sv_strcpy(str, ost.str().c_str());
 } 
  
  
@@ -1613,13 +1615,14 @@ void write_frame()
 	   sv_strcat(frame_file, "0"); 
 	   digit = digit/10;
 	 }
-	 sv_integer new_l = sv_strlen(frame_file);
-         ostrstream ost(&(frame_file[new_l]), length - new_l);
-         ost << frame_count << '\0';               
+         ostringstream ost;
+         ost << frame_count;
+         sv_strcat(frame_file, ost.str().c_str());
+
 	 if(image_type() == SV_BMP) 
-	        sv_strcat(frame_file, ".bmp"); 
-	 else 
-		sv_strcat(frame_file, ".ppm"); 
+	        sv_strcat(frame_file, ".bmp");
+	 else //		ost << ".ppm";
+	        sv_strcat(frame_file, ".ppm");
 
          sv_picture *pic; 
 	 pic = get_pic_from_screen(win_id, 1); 
