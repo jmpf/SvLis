@@ -237,6 +237,7 @@ enum prim_kind
 {
 	SV_REAL,		// Just a number
 	SV_PLANE,		// a plane
+	SV_BLOCK,		// a cuboid block -- irina
 	SV_CYLINDER,		// Special shapes
 	SV_SPHERE,
 	SV_CONE,

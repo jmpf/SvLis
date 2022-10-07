@@ -1376,7 +1376,15 @@ void ray_enquire(int x, int y, int button)
 		cout << " (this is rather a surprise...)."  << SV_EL; 
 		break; 
  
-        case SV_PLANE: 
+        case SV_BLOCK:      // --irina
+		cout << "block. Times "; 
+		//PtoStr(ip, block.xi); 
+		cout << block.xi << " x " 
+		     << block.yi << " x " 
+		     << block.zi ;
+		cout << "." << SV_EL; 
+		
+	case SV_PLANE: 
 		cout << "plane." << SV_EL; 
 		cout << "    Its normal is "; 
 		PtoStr(ip, f.normal); 

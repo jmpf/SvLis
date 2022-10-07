@@ -52,6 +52,12 @@
  * First version: 16 March 1993
  * This version: 8 March 2000
  *
+ * SvLis - This now defines the primitive block class that svLis uses
+ * it's just like normal primitives, except it allows for block primitives
+ *
+ * Irina Voiculescu
+ *
+ * First version: 3 April 2001*
  */
 
 
@@ -88,6 +94,7 @@ private:
 
         sv_integer kind;	// Indicates if this is a plane, real or compound
 	sv_plane flat;		// Arithmetic is done on planes and reals
+	sv_box block;           // The actual block primitive
 	sv_real r;
 	prim_op op;		// If compound, this says +, -, *, /, ^, or one of the monadics
 	sv_integer degree;	// Highest power (trancendentals add one)
@@ -98,6 +105,22 @@ private:
 	sv_primitive *grad_z;
 
         ~prim_data() { delete child_1; delete child_2; delete grad_x; delete grad_y; delete grad_z; }
+
+// Make a block primitive -- irina
+
+	prim_data(const sv_point& low,const sv_point& high)
+	{
+		kind = SV_BLOCK;
+		block = sv_box(low, high);
+		degree = 0;
+		op = SV_ZERO;
+		child_1 = new sv_primitive();
+		child_2 = new sv_primitive();
+		grad_x = new sv_primitive();
+		grad_y = new sv_primitive();
+		grad_z = new sv_primitive();
+	}
+     // </irina>
 
 // Make a single-plane primitive
 
@@ -237,6 +260,11 @@ public:
 
 	sv_primitive(const sv_plane& a) { prim_info = new prim_data(a); }
 	sv_primitive(sv_real a) { prim_info = new prim_data(a); }
+	// -- irina :
+	sv_primitive(sv_point a, sv_point b) {
+	  //cerr <<"making primitive out of "<<a << " and "<<b <<endl;
+	  prim_info = new prim_data(a,b); 
+	}
 
 // Make a user-primitive
 
@@ -254,6 +282,7 @@ public:
 	sv_integer flags() const { return(prim_info->flags()); }
 	sv_plane plane() const { return(prim_info->flat); }
 	sv_real real() const { return(prim_info->r); }
+	sv_box block() const { return(prim_info->block); } // --irina
 	sv_integer kind() const { return(prim_info->kind); }
 	prim_op parameters(sv_integer*, sv_real*, sv_real*, sv_real*, sv_plane*, 
 		sv_point*, sv_line*) const;

@@ -108,7 +108,13 @@ private:
 		if (p.real() <= 0.0) contents = SV_EVERYTHING;
 			else contents = SV_NOTHING;
 	   } else
-	        contents = 1;
+	   if (p.kind() == SV_BLOCK)
+	       {
+		contents = 1;
+	        svlis_error("set_data(sv_primitive)",
+			"sv_set does not know how to do blocks yet",SV_WARNING);
+	       }
+	   else contents = 1;
 
 	   prim = p;
 
