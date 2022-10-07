@@ -79,6 +79,8 @@ extern void sv_compile_model();
 extern void get_display_list();
 extern void release_display_list();
 
+void sv_delete_picture_list(); //imc
+
 /*
  *  Linked list of svLis models for rendering
  */

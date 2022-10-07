@@ -197,11 +197,6 @@ static sv_real tet_fac = 0.8;
  
 static sv_integer plot_axes = 0; 
 
-
-// Forward declaration for later
-void sv_delete_picture_list();
-
-
 //********************************************************************************************************
 
 // Thread handling
