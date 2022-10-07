@@ -213,10 +213,11 @@ FL = -DSV_UNIX -pedantic -fPIC -funroll-loops -DSHM
 # -L[OpenGL library directory] before the -lglut on the next line
 # where [OpenGL library directory] is wherever they are.
 
-GB = -lglut -lsvlis -lGLU -lGL -L/usr/X11R6/lib -lXmu -lXi -lXext -lX11 -lpthread -lm
+GB = -lglut -lGLU -lGL -lXmu -lXi -lXext -lX11 -lpthread -lm
 
 # Debug or optimize (-pg, -g or -O)
-DEBUG = -pg
+#DEBUG = -pg
+DEBUG = -O3 -g
 
 # Define the ranlib command
 
@@ -255,7 +256,9 @@ RESULTS = $(SVLIS)/results
 
 # Libraries for the linker (with graphics)
 
-GLIBS =	-L$(LDIR) -lsvlis $(GB)
+#GLIBS =	-L$(LDIR) -lsvlis $(GB)
+RPATH=-Wl,-rpath,$(LDIR)
+GLIBS =	-L$(LDIR) $(RPATH) -lsvlis $(GB)
 
 # Arguments to send to the compiler
 
@@ -358,6 +361,10 @@ $(LDIR)/libsvlis.a:	$(ODIR) $(LDIR) $(OBJECTS)
 		rm -rf $(LDIR)/libsvlis.a
 		ar -rs $(LDIR)/libsvlis.a $(OBJECTS)
 		$(RANLIB)
+		$(CC) -shared -Wl,-soname=libsvlis.so.4 -o $(LDIR)/libsvlis.so.4.0 $(OBJECTS) -lglut -lGLU -lGL -lXext -lX11 -lpthread -lm
+		ln -sf libsvlis.so.4.0 $(LDIR)/libsvlis.so.4
+		ln -sf libsvlis.so.4 $(LDIR)/libsvlis.so
+
 svlis:		$(RDIR)/svlis
 
 # The next one is intended for general short experiments
