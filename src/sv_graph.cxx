@@ -1733,6 +1733,7 @@ void sv_compile_model()
  
 void animate(void) 
 { 
+  if (force_recompile) sv_compile_model();
   new_transforms(lastquat, SV_OO);  
   sv_draw(1); 
 } 
@@ -3203,7 +3204,8 @@ void plot_m_p_gons( const sv_model& m, const char* title )
    if(thread_running)
    {
 	svm->model(m);
-	sv_draw_all();
+	force_recompile = 1;
+	newModel = 1;
    } else
       add_model_to_picture(m, m.facet(), SV_OO, SV_ZL, 0, 0);
 } 
@@ -3252,7 +3254,7 @@ void plot_voronoi(const sv_voronoi& v, const char* title,
    if(thread_running)
    {
 	force_recompile = 1;
-	Re_Draw();
+	newModel = 1;
    } else
 	first_model(title);
 } 
