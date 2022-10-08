@@ -213,7 +213,7 @@ FL = -DSV_UNIX -pedantic -fPIC -funroll-loops -DSHM
 # -L[OpenGL library directory] before the -lglut on the next line
 # where [OpenGL library directory] is wherever they are.
 
-GB = -lglut -lGLU -lGL -lXmu -lXi -lXext -lX11 -lpthread -lm
+GB = -lglut -lGLU -lGL -lXext -lX11 -lpthread -lm
 
 # Debug or optimize (-pg, -g or -O)
 #DEBUG = -pg
